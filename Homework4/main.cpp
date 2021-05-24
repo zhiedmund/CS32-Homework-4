@@ -5,10 +5,44 @@
 //  Created by Edmund Zhi on 5/22/21.
 //
 
+#include "Set.h"
 #include <iostream>
+#include <string>
+#include <cassert>
+using namespace std;
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
+void test()
+{
+    Set<int> si;
+    Set<string> ss;
+    assert(si.empty());
+    assert(ss.empty());
+    assert(si.size() == 0);
+    assert(ss.size() == 0);
+    assert(si.insert(10));
+    assert(ss.insert("hello"));
+    assert(si.contains(10));
+    assert(ss.contains("hello"));
+    int i;
+    assert(si.get(0, i)  &&  i == 10);
+    string s;
+    assert(ss.get(0, s)  &&  s == "hello");
+    assert(si.erase(10));
+    assert(ss.erase("hello"));
+    Set<int> si2(si);
+    Set<string> ss2(ss);
+    si.swap(si2);
+    ss.swap(ss2);
+    si = si2;
+    ss = ss2;
+    unite(si,si2,si);
+    unite(ss,ss2,ss);
+    difference(si,si2,si);
+    difference(ss,ss2,ss);
+}
+
+int main()
+{
+    test();
+    cout << "Passed all tests" << endl;
 }
